@@ -1,0 +1,18 @@
+services:
+  node:
+    build:
+      context: ./NodeJS
+    ports:
+      - "3000:3000"
+
+  java:
+    build:
+      context: ./Java
+    ports:
+      - "3001:8080"
+
+  csharp:
+    build:
+      context: ./C#
+    ports:
+      - "3002:8080"

@@ -27,7 +27,7 @@ npm-debug.log*
 #/Aula02
 #/Aula03
 #/Aula04
-/Aula05
+#Aula05
 /Aula06
 /Aula07
 /Aula08
@@ -35,7 +35,7 @@ npm-debug.log*
 /Aula10
 
 # Labs
-/labNode2
+#/labNode2
 
 # Arquivos do Prof
 /gabaritos
