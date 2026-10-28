@@ -1,0 +1,21 @@
+{
+  "name": "minha-api-restful",
+  "version": "1.0.0",
+  "description": "Aula 07 - API de produtos refatorada para o padrão RESTful",
+  "main": "server-restful.js",
+  "scripts": {
+    "start": "node server-restful.js",
+    "dev": "node --watch server-restful.js"
+  },
+  "keywords": [
+    "express",
+    "rest",
+    "api"
+  ],
+  "author": "Bruno Freitas de Souza",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
