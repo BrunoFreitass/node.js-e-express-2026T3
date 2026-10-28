@@ -1,6 +1,6 @@
 # Aula 03 — Laboratório: API de Tarefas com Express
 
-**Aluno:** Bruno Freitas de Souza — Noturno
+**Aluno:** Bruno Freitas de Souza — Vespertino
 
 ## O que foi feito
 

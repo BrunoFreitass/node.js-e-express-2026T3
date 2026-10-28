@@ -1,6 +1,6 @@
 # Aula 02 — Laboratório: Módulos e NPM
 
-**Aluno:** Bruno Freitas de Souza — Noturno
+**Aluno:** Bruno Freitas de Souza — Vespertino
 
 ## O que foi feito
 

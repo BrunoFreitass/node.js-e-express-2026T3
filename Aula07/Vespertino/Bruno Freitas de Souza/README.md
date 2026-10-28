@@ -1,7 +1,7 @@
 # Minha API RESTful — Produtos
 
 **Aula 07 · Atividade RESTful**
-**Aluno:** Bruno Freitas de Souza · **Turma:** Noturno
+**Aluno:** Bruno Freitas de Souza · **Turma:** Vespertino
 
 Refatoração da API de produtos da Aula 07 para seguir os princípios REST: URIs com substantivos no plural, métodos HTTP com significado, dados em `params`/`body` e códigos de status semânticos.
 

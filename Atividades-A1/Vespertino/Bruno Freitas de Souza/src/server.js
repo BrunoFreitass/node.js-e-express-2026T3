@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
   res.status(200).json({
     mensagem: "Bem-vindo à API de Produtos (Atividade A1 - Nível Jedi)!",
     aluno: "Bruno Freitas de Souza",
-    turno: "Noturno",
+    turno: "Vespertino",
     endpoints: {
       listarTodos: "GET /produtos",
       buscarPorId: "GET /produtos/:id",

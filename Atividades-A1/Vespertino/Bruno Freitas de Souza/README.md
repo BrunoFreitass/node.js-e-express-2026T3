@@ -1,7 +1,7 @@
 # 🚀 Atividade A1 (Nível Jedi) — API RESTful de Produtos
 
 - **Aluno:** Bruno Freitas de Souza
-- **Turno:** Noturno
+- **Turno:** Vespertino
 - **Nível escolhido:** Nível Jedi (Extra desafio — Completo)
 
 ---
@@ -62,7 +62,7 @@ flowchart LR
 
 ### 1. Instalar as dependências
 
-Abra o terminal na pasta do projeto (`Atividades-A1/Noturno/Bruno Freitas de Souza`) e execute:
+Abra o terminal na pasta do projeto (`Atividades-A1/Vespertino/Bruno Freitas de Souza`) e execute:
 
 ```bash
 npm install

@@ -1,6 +1,6 @@
 # Aula 07 — Laboratório: Refatorando a API de Tarefas para REST
 
-**Aluno:** Bruno Freitas de Souza — Noturno
+**Aluno:** Bruno Freitas de Souza — Vespertino
 
 Laboratório da Aula 07 (API de tarefas). A atividade avaliativa de produtos está na pasta acima ([`../README.md`](../README.md)).
 

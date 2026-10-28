@@ -1,6 +1,6 @@
 # Aula 04 — Laboratório: Middlewares de Log e Autenticação
 
-**Aluno:** Bruno Freitas de Souza — Noturno
+**Aluno:** Bruno Freitas de Souza — Vespertino
 
 ## O que foi feito
 

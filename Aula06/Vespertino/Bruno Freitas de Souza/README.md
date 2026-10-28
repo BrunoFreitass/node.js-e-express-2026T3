@@ -1,6 +1,6 @@
 # Aula 06 — Laboratório: API de Tarefas com PostgreSQL
 
-**Aluno:** Bruno Freitas de Souza — Noturno
+**Aluno:** Bruno Freitas de Souza — Vespertino
 
 ## O que foi feito
 
