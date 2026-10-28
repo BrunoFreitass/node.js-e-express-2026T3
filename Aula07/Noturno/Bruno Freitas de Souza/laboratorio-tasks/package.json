@@ -1,0 +1,17 @@
+{
+  "name": "aula07-laboratorio-tasks-bruno-freitas-de-souza",
+  "version": "1.0.0",
+  "description": "Aula 07 - Laboratório: API de tarefas refatorada para o padrão RESTful",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "Bruno Freitas de Souza - Noturno",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
