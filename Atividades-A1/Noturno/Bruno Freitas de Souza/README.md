@@ -15,7 +15,7 @@ Esta é uma API RESTful para gerenciamento de **Produtos** em memória, desenvol
    - `GET /produtos` — Lista todos os produtos (`200 OK`).
    - `GET /produtos/:id` — Filtra um produto por ID via parâmetro de rota (`req.params.id`), exibindo o valor recebido (`200 OK` ou `404 Not Found`).
    - `POST /produtos` — Cadastra um novo produto em memória (`201 Created`).
-   - `PUT /produtos/:id` — Atualiza os dados de um produto existente (`200 OK` ou `404 Not Found`).
+   - `PUT /produtos/:id` — Atualiza os dados de um produto existente (`200 OK`, `400 Bad Request` se `nome` vier vazio ou `preco` não for número maior que 0, ou `404 Not Found`).
    - `DELETE /produtos/:id` — Remove um produto da lista em memória (`200 OK` ou `404 Not Found`).
 3. **Middleware de Logging Colorido (`colors`):** Registra no terminal a entrada da requisição e, ao finalizar a resposta, destaca os *Status Codes* por cores (`2xx` em verde, `3xx` em ciano, `4xx` em amarelo e `5xx` em vermelho).
 4. **Middleware de Autenticação Básica:** Protege as rotas de escrita (`POST`, `PUT` e `DELETE`) exigindo o token fixo `123456` no cabeçalho (`x-token`), retornando `401 Unauthorized` quando ausente ou incorreto.
@@ -94,6 +94,8 @@ Você também pode validar todas as rotas (sucesso e erro) com um único comando
 npm test
 ```
 
+São 11 testes. Cada um compara o status recebido com o esperado e mostra ✅ (passou) ou ❌ (falhou). Se algum teste falhar, o comando termina com código de saída `1`.
+
 ---
 
 ## 📖 Documentação dos Endpoints
@@ -113,14 +115,14 @@ npm test
 | `GET`    | `/produtos`      | ❌ Não     | `200 OK`          | —                  | Lista todos os produtos cadastrados em memória |
 | `GET`    | `/produtos/:id`  | ❌ Não     | `200 OK`          | `404 Not Found`    | Busca um produto pelo `id` e exibe o parâmetro |
 | `POST`   | `/produtos`      | 🔒 Sim     | `201 Created`     | `400` / `401`      | Cria um novo produto em memória                |
-| `PUT`    | `/produtos/:id`  | 🔒 Sim     | `200 OK`          | `401` / `404`      | Atualiza os dados de um produto pelo `id`      |
+| `PUT`    | `/produtos/:id`  | 🔒 Sim     | `200 OK`          | `400` / `401` / `404` | Atualiza os dados de um produto pelo `id`   |
 | `DELETE` | `/produtos/:id`  | 🔒 Sim     | `200 OK`          | `401` / `404`      | Remove um produto da memória pelo `id`         |
 
 ---
 
 ## 🧪 Evidências de Testes (Sucesso e Erro)
 
-Abaixo estão os testes realizados na API, cobrindo listagem, filtro por ID, criação, atualização, remoção e bloqueio por autenticação (`401`) ou recurso inexistente (`404`).
+Abaixo estão os testes realizados na API, cobrindo listagem, filtro por ID, criação, atualização, remoção, bloqueio por autenticação (`401`), recurso inexistente (`404`) e validação de dados no `PUT` (`400`).
 
 ### 1. Listar todos os produtos (`GET /produtos` — Sucesso `200`)
 
@@ -276,36 +278,124 @@ Abaixo estão os testes realizados na API, cobrindo listagem, filtro por ID, cri
 }
 ```
 
+### 9. Atualizar produto com preço NEGATIVO (`PUT /produtos/3` — Erro `400`)
+
+- **Requisição:** `PUT http://localhost:3000/produtos/3`
+- **Headers:**
+  - `Content-Type: application/json`
+  - `x-token: 123456`
+- **Body (JSON):**
+```json
+{
+  "preco": -5
+}
+```
+- **Resposta (`400 Bad Request`):**
+```json
+{
+  "erro": "Os campos 'nome' e 'preco' (número maior que 0) são obrigatórios."
+}
+```
+
+### 10. Atualizar produto com preço em TEXTO (`PUT /produtos/3` — Erro `400`)
+
+- **Requisição:** `PUT http://localhost:3000/produtos/3`
+- **Headers:**
+  - `Content-Type: application/json`
+  - `x-token: 123456`
+- **Body (JSON):**
+```json
+{
+  "preco": "abc"
+}
+```
+- **Resposta (`400 Bad Request`):**
+```json
+{
+  "erro": "Os campos 'nome' e 'preco' (número maior que 0) são obrigatórios."
+}
+```
+
+### 11. Atualizar produto com nome VAZIO (`PUT /produtos/3` — Erro `400`)
+
+- **Requisição:** `PUT http://localhost:3000/produtos/3`
+- **Headers:**
+  - `Content-Type: application/json`
+  - `x-token: 123456`
+- **Body (JSON):**
+```json
+{
+  "nome": ""
+}
+```
+- **Resposta (`400 Bad Request`):**
+```json
+{
+  "erro": "Os campos 'nome' e 'preco' (número maior que 0) são obrigatórios."
+}
+```
+
 ---
+
+### ✅ Resultado do `npm test`
+
+```text
+✅ [Teste 1] GET /produtos (Total de itens: 4) -> Esperado: 200 | Recebido: 200
+✅ [Teste 2] GET /produtos/2 -> Esperado: 200 | Recebido: 200
+✅ [Teste 3] GET /produtos/999 (ID inexistente) -> Esperado: 404 | Recebido: 404
+✅ [Teste 4] POST /produtos (Sem Token) -> Esperado: 401 | Recebido: 401
+✅ [Teste 5] POST /produtos (Token Inválido) -> Esperado: 401 | Recebido: 401
+✅ [Teste 6] POST /produtos (Token Válido) -> Esperado: 201 | Recebido: 201
+✅ [Teste 7] PUT /produtos/2 (Token Válido) -> Esperado: 200 | Recebido: 200
+✅ [Teste 8] DELETE /produtos/1 (Token Válido) -> Esperado: 200 | Recebido: 200
+✅ [Teste 9] PUT /produtos/3 (preco -5) -> Esperado: 400 | Recebido: 400
+✅ [Teste 10] PUT /produtos/3 (preco "abc") -> Esperado: 400 | Recebido: 400
+✅ [Teste 11] PUT /produtos/3 (nome vazio) -> Esperado: 400 | Recebido: 400
+🎉 TODOS OS TESTES PASSARAM!
+```
+
+*(O terminal também mostra o corpo de cada resposta; foi omitido aqui para facilitar a leitura.)*
 
 ### 🖥️ Saída do Logger Colorido no Terminal (`npm test`)
 
 ```text
-[2026-10-26T18:46:25.950Z] ➡️  Requisição recebida no middleware: GET /produtos
-[2026-10-26T18:46:25.955Z] ⬅️  GET /produtos - Status: 200 (5ms)
+[2026-10-28T13:09:02.175Z] ➡️  Requisição recebida no middleware: GET /produtos
+[2026-10-28T13:09:02.180Z] ⬅️  GET /produtos - Status: 200 (5ms)
 
-[2026-10-26T18:46:25.968Z] ➡️  Requisição recebida no middleware: GET /produtos/2
+[2026-10-28T13:09:02.194Z] ➡️  Requisição recebida no middleware: GET /produtos/2
 🔎 Parâmetro de rota recebido em GET /produtos/:id -> id = 2
-[2026-10-26T18:46:25.970Z] ⬅️  GET /produtos/2 - Status: 200 (2ms)
+[2026-10-28T13:09:02.196Z] ⬅️  GET /produtos/2 - Status: 200 (2ms)
 
-[2026-10-26T18:46:25.977Z] ➡️  Requisição recebida no middleware: GET /produtos/999
+[2026-10-28T13:09:02.200Z] ➡️  Requisição recebida no middleware: GET /produtos/999
 🔎 Parâmetro de rota recebido em GET /produtos/:id -> id = 999
-[2026-10-26T18:46:25.978Z] ⬅️  GET /produtos/999 - Status: 404 (1ms)
+[2026-10-28T13:09:02.201Z] ⬅️  GET /produtos/999 - Status: 404 (1ms)
 
-[2026-10-26T18:46:26.008Z] ➡️  Requisição recebida no middleware: POST /produtos
-[2026-10-26T18:46:26.009Z] ⬅️  POST /produtos - Status: 401 (1ms)
+[2026-10-28T13:09:02.525Z] ➡️  Requisição recebida no middleware: POST /produtos
+[2026-10-28T13:09:02.527Z] ⬅️  POST /produtos - Status: 401 (2ms)
 
-[2026-10-26T18:46:26.025Z] ➡️  Requisição recebida no middleware: POST /produtos
-[2026-10-26T18:46:26.027Z] ⬅️  POST /produtos - Status: 401 (2ms)
+[2026-10-28T13:09:02.546Z] ➡️  Requisição recebida no middleware: POST /produtos
+[2026-10-28T13:09:02.547Z] ⬅️  POST /produtos - Status: 401 (1ms)
 
-[2026-10-26T18:46:26.041Z] ➡️  Requisição recebida no middleware: POST /produtos
-[2026-10-26T18:46:26.041Z] ⬅️  POST /produtos - Status: 201 (0ms)
+[2026-10-28T13:09:02.562Z] ➡️  Requisição recebida no middleware: POST /produtos
+[2026-10-28T13:09:02.562Z] ⬅️  POST /produtos - Status: 201 (0ms)
 
-[2026-10-26T18:46:26.055Z] ➡️  Requisição recebida no middleware: PUT /produtos/2
+[2026-10-28T13:09:02.578Z] ➡️  Requisição recebida no middleware: PUT /produtos/2
 ✏️  Parâmetro de rota recebido em PUT /produtos/:id -> id = 2
-[2026-10-26T18:46:26.055Z] ⬅️  PUT /produtos/2 - Status: 200 (0ms)
+[2026-10-28T13:09:02.580Z] ⬅️  PUT /produtos/2 - Status: 200 (2ms)
 
-[2026-10-26T18:46:26.070Z] ➡️  Requisição recebida no middleware: DELETE /produtos/1
+[2026-10-28T13:09:02.594Z] ➡️  Requisição recebida no middleware: DELETE /produtos/1
 🗑️  Parâmetro de rota recebido em DELETE /produtos/:id -> id = 1
-[2026-10-26T18:46:26.070Z] ⬅️  DELETE /produtos/1 - Status: 200 (0ms)
+[2026-10-28T13:09:02.595Z] ⬅️  DELETE /produtos/1 - Status: 200 (1ms)
+
+[2026-10-28T13:09:02.610Z] ➡️  Requisição recebida no middleware: PUT /produtos/3
+✏️  Parâmetro de rota recebido em PUT /produtos/:id -> id = 3
+[2026-10-28T13:09:02.611Z] ⬅️  PUT /produtos/3 - Status: 400 (1ms)
+
+[2026-10-28T13:09:02.616Z] ➡️  Requisição recebida no middleware: PUT /produtos/3
+✏️  Parâmetro de rota recebido em PUT /produtos/:id -> id = 3
+[2026-10-28T13:09:02.617Z] ⬅️  PUT /produtos/3 - Status: 400 (1ms)
+
+[2026-10-28T13:09:02.624Z] ➡️  Requisição recebida no middleware: PUT /produtos/3
+✏️  Parâmetro de rota recebido em PUT /produtos/:id -> id = 3
+[2026-10-28T13:09:02.625Z] ⬅️  PUT /produtos/3 - Status: 400 (1ms)
 ```
