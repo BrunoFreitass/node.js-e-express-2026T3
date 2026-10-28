@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware de Autenticação (Aula 04): protege as rotas de escrita
+// Middleware de Autenticação (Aula 04): mantido como referência, não aplicado nas rotas (como na versão do professor)
 function autenticar(req, res, next) {
   const token = req.headers["x-token"];
 
@@ -56,7 +56,7 @@ app.get("/tasks/:id", async (req, res) => {
 });
 
 // POST /tasks - Cria uma tarefa (RETURNING * devolve a tarefa criada)
-app.post("/tasks", autenticar, async (req, res) => {
+app.post("/tasks", async (req, res) => {
   // Express 5: req.body fica undefined quando a requisição vem sem corpo
   const { title, description, status, user_id } = req.body || {};
 
@@ -82,7 +82,7 @@ app.post("/tasks", autenticar, async (req, res) => {
 });
 
 // PUT /tasks/:id - Atualiza uma tarefa
-app.put("/tasks/:id", autenticar, async (req, res) => {
+app.put("/tasks/:id", async (req, res) => {
   const { id } = req.params;
   const { title, description, status } = req.body || {};
 
@@ -119,7 +119,7 @@ app.put("/tasks/:id", autenticar, async (req, res) => {
 });
 
 // DELETE /tasks/:id - Remove uma tarefa
-app.delete("/tasks/:id", autenticar, async (req, res) => {
+app.delete("/tasks/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const result = await db.query(
