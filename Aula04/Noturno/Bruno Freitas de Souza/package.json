@@ -1,0 +1,17 @@
+{
+  "name": "aula04-laboratorio-bruno-freitas-de-souza",
+  "version": "1.0.0",
+  "description": "Aula 04 - Laboratório: API de tarefas com middlewares de log e autenticação",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "Bruno Freitas de Souza - Noturno",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
