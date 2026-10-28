@@ -7,7 +7,7 @@
 
         <!-- Tabela users -->
         <mxCell id="users_table" value="users" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="80" y="120" width="280" height="210" as="geometry" />
+          <mxGeometry x="80" y="120" width="280" height="240" as="geometry" />
         </mxCell>
         <mxCell id="users_id" value="🔑 PK  id : SERIAL (INTEGER)" style="text;strokeColor=none;fillColor=none;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1;" vertex="1" parent="users_table">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -21,11 +21,14 @@
         <mxCell id="users_email" value="      email : VARCHAR(100) UNIQUE NOT NULL" style="text;strokeColor=none;fillColor=none;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="users_table">
           <mxGeometry y="120" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="users_password" value="      password : VARCHAR(255) NOT NULL" style="text;strokeColor=none;fillColor=none;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="users_table">
+        <mxCell id="users_password" value="      password : VARCHAR(255)" style="text;strokeColor=none;fillColor=none;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="users_table">
           <mxGeometry y="150" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="users_created_at" value="      created_at : TIMESTAMPTZ DEFAULT NOW()" style="text;strokeColor=none;fillColor=none;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="users_table">
+        <mxCell id="users_password_hash" value="      password_hash : VARCHAR(255)" style="text;strokeColor=none;fillColor=none;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="users_table">
           <mxGeometry y="180" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="users_created_at" value="      created_at : TIMESTAMPTZ DEFAULT NOW()" style="text;strokeColor=none;fillColor=none;spacingLeft=8;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="users_table">
+          <mxGeometry y="210" width="280" height="30" as="geometry" />
         </mxCell>
 
         <!-- Tabela tasks -->
