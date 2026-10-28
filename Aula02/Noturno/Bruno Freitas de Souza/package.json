@@ -1,0 +1,17 @@
+{
+  "name": "aula02-laboratorio-bruno-freitas-de-souza",
+  "version": "1.0.0",
+  "description": "Aula 02 - Laboratório: módulos locais e pacote externo (date-fns)",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [],
+  "author": "Bruno Freitas de Souza - Noturno",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "date-fns": "^4.4.0"
+  }
+}
