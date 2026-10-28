@@ -1,0 +1,19 @@
+{
+  "name": "aula06-laboratorio-bruno-freitas-de-souza",
+  "version": "1.0.0",
+  "description": "Aula 06 - Laboratório: API de tarefas com PostgreSQL (pg + dotenv)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "Bruno Freitas de Souza - Noturno",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
+  }
+}
