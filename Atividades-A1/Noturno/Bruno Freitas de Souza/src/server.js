@@ -85,7 +85,20 @@ app.put("/produtos/:id", autenticar, (req, res) => {
 
   console.log(colors.cyan(`✏️  Parâmetro de rota recebido em PUT /produtos/:id -> id = ${parametroRecebido}`));
 
-  const produtoAtualizado = produtosService.atualizarProduto(id, req.body || {});
+  const dados = req.body || {};
+  const { nome, preco } = dados;
+
+  // Valida apenas os campos enviados: nome não pode ser vazio e preco deve ser número maior que 0
+  const nomeInvalido = nome !== undefined && (typeof nome !== "string" || nome.trim() === "");
+  const precoInvalido = preco !== undefined && (isNaN(Number(preco)) || Number(preco) <= 0);
+
+  if (nomeInvalido || precoInvalido) {
+    return res.status(400).json({
+      erro: "Os campos 'nome' e 'preco' (número maior que 0) são obrigatórios."
+    });
+  }
+
+  const produtoAtualizado = produtosService.atualizarProduto(id, dados);
 
   if (!produtoAtualizado) {
     return res.status(404).json({
