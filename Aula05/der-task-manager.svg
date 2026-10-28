@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="420" viewBox="0 0 940 420" font-family="Segoe UI, Roboto, Arial, sans-serif">
+  <rect width="940" height="420" fill="#f8fafc" rx="12" />
+  <text x="470" y="38" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">
+    Diagrama Entidade-Relacionamento (DER) — Banco de Dados: task_manager (Aula 05)
+  </text>
+
+  <!-- Tabela users -->
+  <g transform="translate(40, 80)">
+    <rect width="340" height="240" rx="8" fill="#ffffff" stroke="#3b82f6" stroke-width="2" />
+    <path d="M0,8 Q0,0 8,0 L332,0 Q340,0 340,8 L340,40 L0,40 Z" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" />
+    <text x="170" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e3a8a">users</text>
+
+    <text x="16" y="68" font-size="13" font-weight="bold" fill="#0f172a">🔑 PK  id</text>
+    <text x="324" y="68" text-anchor="end" font-size="12" fill="#475569">SERIAL PRIMARY KEY</text>
+    <line x1="0" y1="80" x2="340" y2="80" stroke="#e2e8f0" />
+
+    <text x="16" y="104" font-size="13" fill="#1e293b">name</text>
+    <text x="324" y="104" text-anchor="end" font-size="12" fill="#475569">VARCHAR(100) NOT NULL</text>
+    <line x1="0" y1="116" x2="340" y2="116" stroke="#e2e8f0" />
+
+    <text x="16" y="140" font-size="13" fill="#1e293b">email</text>
+    <text x="324" y="140" text-anchor="end" font-size="12" fill="#475569">VARCHAR(100) UNIQUE NOT NULL</text>
+    <line x1="0" y1="152" x2="340" y2="152" stroke="#e2e8f0" />
+
+    <text x="16" y="176" font-size="13" fill="#1e293b">password</text>
+    <text x="324" y="176" text-anchor="end" font-size="12" fill="#475569">VARCHAR(100) NOT NULL</text>
+    <line x1="0" y1="188" x2="340" y2="188" stroke="#e2e8f0" />
+
+    <text x="16" y="214" font-size="13" fill="#1e293b">created_at</text>
+    <text x="324" y="214" text-anchor="end" font-size="12" fill="#475569">TIMESTAMPTZ DEFAULT NOW()</text>
+  </g>
+
+  <!-- Linha de Relacionamento 1 : N (Crow's Foot) -->
+  <g stroke="#334155" stroke-width="2.2" fill="none">
+    <!-- Linha principal ligando users.id a tasks.user_id -->
+    <path d="M 380 144 L 465 144 L 465 292 L 540 292" />
+    <!-- Marca de 1 (um e apenas um) no lado de users -->
+    <line x1="392" y1="134" x2="392" y2="154" />
+    <line x1="400" y1="134" x2="400" y2="154" />
+    <!-- Marca de 0..N (zero ou muitos) no lado de tasks -->
+    <circle cx="518" cy="292" r="5" fill="#f8fafc" stroke="#334155" stroke-width="2" />
+    <line x1="526" y1="292" x2="540" y2="282" />
+    <line x1="526" y1="292" x2="540" y2="302" />
+  </g>
+  <rect x="415" y="198" width="100" height="28" rx="6" fill="#e2e8f0" />
+  <text x="465" y="217" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">possui (1 : N)</text>
+
+  <!-- Tabela tasks -->
+  <g transform="translate(540, 65)">
+    <rect width="360" height="310" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2" />
+    <path d="M0,8 Q0,0 8,0 L352,0 Q360,0 360,8 L360,40 L0,40 Z" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
+    <text x="180" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#14532d">tasks</text>
+
+    <text x="16" y="68" font-size="13" font-weight="bold" fill="#0f172a">🔑 PK  id</text>
+    <text x="344" y="68" text-anchor="end" font-size="12" fill="#475569">SERIAL PRIMARY KEY</text>
+    <line x1="0" y1="80" x2="360" y2="80" stroke="#e2e8f0" />
+
+    <text x="16" y="104" font-size="13" fill="#1e293b">title</text>
+    <text x="344" y="104" text-anchor="end" font-size="12" fill="#475569">VARCHAR(255) NOT NULL</text>
+    <line x1="0" y1="116" x2="360" y2="116" stroke="#e2e8f0" />
+
+    <text x="16" y="140" font-size="13" fill="#1e293b">description</text>
+    <text x="344" y="140" text-anchor="end" font-size="12" fill="#475569">TEXT</text>
+    <line x1="0" y1="152" x2="360" y2="152" stroke="#e2e8f0" />
+
+    <text x="16" y="176" font-size="13" fill="#1e293b">status</text>
+    <text x="344" y="176" text-anchor="end" font-size="12" fill="#475569">VARCHAR(50) DEFAULT 'pendente'</text>
+    <line x1="0" y1="188" x2="360" y2="188" stroke="#e2e8f0" />
+
+    <text x="16" y="212" font-size="13" fill="#1e293b">due_date</text>
+    <text x="344" y="212" text-anchor="end" font-size="12" fill="#475569">DATE</text>
+    <line x1="0" y1="224" x2="360" y2="224" stroke="#e2e8f0" />
+
+    <text x="16" y="248" font-size="13" font-weight="bold" fill="#15803d">🔗 FK  user_id</text>
+    <text x="344" y="248" text-anchor="end" font-size="12" fill="#15803d">INT NOT NULL → users(id)</text>
+    <line x1="0" y1="260" x2="360" y2="260" stroke="#e2e8f0" />
+
+    <text x="16" y="288" font-size="13" fill="#1e293b">created_at</text>
+    <text x="344" y="288" text-anchor="end" font-size="12" fill="#475569">TIMESTAMPTZ DEFAULT NOW()</text>
+  </g>
+</svg>
